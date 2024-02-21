@@ -6,6 +6,7 @@ def link_parser():
         soup = BeautifulSoup(page, 'html.parser')
         page.close()
         
+        # Парсим и сохраняем ссылки пользователей
         user_cards = soup.find_all('div', class_='user-grid-card')
         for user_card in user_cards:
             user_link = user_card.find('a').get('href')

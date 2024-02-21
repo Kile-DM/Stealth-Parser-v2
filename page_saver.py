@@ -6,8 +6,9 @@ from selenium_stealth import stealth
 
 
 # Данные аккаунта для selenium
-USER_NAME = '+79969680985' # Логин аккаунта
-USER_PASSWORD = '54dk7PElEg' # Пароль аккаунта
+with open('resources/acc_for_page_saver.txt') as f:
+    user_name, user_password = f.readline().split(':')
+    f.close()
 
 def page_saver():
     print('Начинаю работу!')
@@ -35,9 +36,9 @@ def page_saver():
     driver.get(url) # Открываем страницу в браузере
     driver.implicitly_wait(2) # Ждём загрузки страницы
     pointer = driver.find_element(By.ID, 'field_email') # Находим поле с вводом имейла
-    pointer.send_keys(USER_NAME) # Вводим имейл
+    pointer.send_keys(user_name) # Вводим имейл
     pointer = driver.find_element(By.ID, 'field_password') # Находим поле с вводом пароля
-    pointer.send_keys(USER_PASSWORD) # Вводим пароль
+    pointer.send_keys(user_password) # Вводим пароль
     pointer.send_keys(Keys.ENTER) # Нажимаем ENTER
     driver.implicitly_wait(2) # Ждём загрузки страницы
 
@@ -67,19 +68,3 @@ def page_saver():
     print(f'Страница {url} успешно сохранена!')
     driver.close()
     driver.quit()
-    
-    
-        
-       
-        
-
-
-
-
-
-    
-
-
-
-
-

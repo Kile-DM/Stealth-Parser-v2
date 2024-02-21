@@ -59,8 +59,9 @@ def page_saver():
             scroll_counter += 1
             continue  
 
+       
     # Закрываем драйвер после завершения прокрутки и сохранения страницы
-    with open('save.txt', 'w') as f:
+    with open(f'saved_page.txt', 'w') as f:
         f.write(driver.page_source)
         f.close()
     print(f'Страница {url} успешно сохранена!')

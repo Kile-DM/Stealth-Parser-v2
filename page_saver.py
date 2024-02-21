@@ -13,8 +13,8 @@ def page_saver():
     print('Начинаю работу!')
     # Добавляем опции 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
-    #chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
+    #chrome_options.add_argument("--headless")
+    chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
     chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
     chrome_options.add_experimental_option('useAutomationExtension', False)
     driver = webdriver.Chrome(options=chrome_options)
@@ -42,7 +42,7 @@ def page_saver():
     driver.implicitly_wait(2) # Ждём загрузки страницы
 
     # Действия после входа
-    url = 'https://ok.ru/myogibenin/members' # Указываем страницу участников группы
+    url = 'https://ok.ru/znaktv/members' # Указываем страницу участников группы
     driver.get(url) # Загружаем страницу участников группы
     driver.implicitly_wait(2) # Ожидаем загрузки страницы    
 
@@ -50,7 +50,7 @@ def page_saver():
     # Цикл прокрутки страницы
     print(f'Выполняю прокрутку страницы {url} ...')
     scroll_counter = 0
-    while scroll_counter < 10:
+    while scroll_counter < 0:
         try:
             driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
             scroll_counter = 0

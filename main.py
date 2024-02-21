@@ -3,29 +3,31 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium_stealth import stealth
-import time
-
-# Запускаем таймер
-start = time.monotonic()
 
 
-
-# Импортируем init 
-from init import driver
-
+# Данные аккаунта для selenium
 USER_NAME = '+79969680985' # Логин аккаунта
 USER_PASSWORD = '54dk7PElEg' # Пароль аккаунта
 
-links = [] # Создаём переменную для хранения всех ссылок на страницы пользователей. Значение переменной сбрасывается при каждой итерации цикла
-scrolling_counter = 0 # Добавляем счетчик скроллиннга
 
+# Добавляем опции 
+chrome_options = webdriver.ChromeOptions()
+#chrome_options.add_argument("--headless")
+chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
+chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
+chrome_options.add_experimental_option('useAutomationExtension', False)
+driver = webdriver.Chrome(options=chrome_options)
 
-
-# Логика скрипта
-print('Программа начала работу!')
-
-
-    
+# Добавляем параметры к stealth
+stealth(
+    driver,
+    languages=['ru-Ru', 'ru'],
+    vendor='Google Inc.',
+    platform='Win32',
+    webgl_vendor='Intel Inc.',
+    renderer='Intel Iris OpenGL Engine',
+    fix_hairline=True
+)
 
 
 # Авторизация на сайте
@@ -40,53 +42,46 @@ pointer.send_keys(Keys.ENTER) # Нажимаем ENTER
 driver.implicitly_wait(2) # Ждём загрузки страницы
 
 # Действия после входа
-url = 'https://ok.ru/znaktv/members' # Указываем страницу участников группы
+url = 'https://ok.ru/myogibenin/members' # Указываем страницу участников группы
 driver.get(url) # Загружаем страницу участников группы
 driver.implicitly_wait(2) # Ожидаем загрузки страницы    
 
 # Основной цикл парсинга 
 print('Выполнение...')
-while True:  
-    driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") # Скроллим страницу вниз
-    try:
-        driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
-    except:
-        scrolling_counter += 1
-        print(f'Обновляю страницу {scrolling_counter}-й раз')
-            # Парсинг элементов        
-        posts = driver.find_elements(By.CLASS_NAME, 'user-grid-card_avatar') # Парсим все элементы блока
-            
-        for post in posts:
-            link = post.find_element(By.TAG_NAME, 'a').get_attribute('href')
-            links.append(link) # Добавляем ссылку в список
-            
-            
-        if len(links) > 0:
-            with open('links.txt', 'a') as f: # Открываем файл с сохраненными ссылками
-                for item in links:
-                    f.write(links.pop(-1) + '\n')
-                    print(f'+ Сохранена ссылка: {item}')
-                print(f'Всего ссылок сохранено: {len(links)}')
-                result = time.monotonic() - start
-                print("Program time: {:>.3f}".format(result) + " seconds.")
-            
-            #Записываем файл
-            with open('links.txt', 'r') as f:
-                s = f.read()
-                s = s.split('\n')
-                if s[-2] == links[-1]:
-                    break
-                else:
-                    continue
-                
-                       
-        # Завершение работы    
-print(f'Программа завершила свою работу') # Выходим программы 
-print(f'Всего ссылок сохранено: {len(links)}')
-result = time.monotonic() - start
-print("Program time: {:>.3f}".format(result) + " seconds.")
-driver.close() # Закрываем окно
-driver.quit() # Выходим из браузер
+
+
+# Переменные
+links = [] # Создаём переменную для хранения всех ссылок на страницы пользователей. Значение переменной сбрасывается при каждой итерации цикла
+
+
+
+
+
+while True:
+    scroll_counter = 0 # Счётчик скролла
+    if scroll_counter < 50:
+        try:
+            driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
+        except:
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") # Скроллим страницу вниз
+            scroll_counter += 1 # Увеличиваем счётчик скролла
+            continue  
+        finally:
+            print('Прокрутка страницы завершена')
+            driver.close()
+            driver.quit() 
+
+    
+    
+        
+       
+        
+
+
+
+
+
+    
 
 
 

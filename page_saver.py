@@ -10,11 +10,13 @@ user_name = '+79310117613'
 user_password = '4PeGbH28Uo'
 
 def page_saver():
+    
     print('Начинаю работу!')
     # Добавляем опции 
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
-    #chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
+    #chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-samdbox")
+    chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
     chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
     chrome_options.add_experimental_option('useAutomationExtension', False)
     driver = webdriver.Chrome(options=chrome_options)
@@ -50,7 +52,7 @@ def page_saver():
     # Цикл прокрутки страницы
     print(f'Выполняю прокрутку страницы {url} ...')
     scroll_counter = 0
-    while scroll_counter < 0:
+    while scroll_counter < 50:
         try:
             driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
             scroll_counter = 0

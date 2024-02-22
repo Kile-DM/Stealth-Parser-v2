@@ -13,8 +13,8 @@ def page_saver():
     print('Начинаю работу!')
     # Добавляем опции 
     chrome_options = webdriver.ChromeOptions()
-    #chrome_options.add_argument("--headless")
-    chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
+    chrome_options.add_argument("--headless")
+    #chrome_options.add_argument("start-maximized") # Открываем браузер на весь экран
     chrome_options.add_experimental_option('excludeSwitches', ['enable-automation'])
     chrome_options.add_experimental_option('useAutomationExtension', False)
     driver = webdriver.Chrome(options=chrome_options)

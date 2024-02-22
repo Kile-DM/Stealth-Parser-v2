@@ -6,9 +6,8 @@ from selenium_stealth import stealth
 
 
 # Данные аккаунта для selenium
-with open('resources/acc_for_page_saver.txt') as f:
-    user_name, user_password = f.readline().split(':')
-    f.close()
+user_name = '+79310117613'
+user_password = '4PeGbH28Uo'
 
 def page_saver():
     print('Начинаю работу!')

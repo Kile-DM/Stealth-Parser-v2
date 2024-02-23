@@ -61,7 +61,7 @@ def main():
             final_link = f'https://ok.ru{link}'
             driver.get(final_link)
             print(f'{final_link} страница посещена')
-            time.sleep(random.randint(1, 5))
+            time.sleep(random.randint(1, 11))
             counter += 1
             #if counter >= 200:
                 #break

@@ -59,7 +59,7 @@ def main():
         links = links.split('\n')
         for link in links:
             final_link = f'https://ok.ru/{link}'
-            #driver.get(final_link)
+            driver.get(final_link)
             print(f'{final_link} страница посещена')
             time.sleep(random.randint(1, 60))
             counter += 1

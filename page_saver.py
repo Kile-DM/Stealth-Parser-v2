@@ -44,7 +44,7 @@ def page_saver():
     driver.implicitly_wait(2) # Ждём загрузки страницы
 
     # Действия после входа
-    url = 'https://ok.ru/znaktv/members' # Указываем страницу участников группы
+    url = 'https://ok.ru/elenapodar/members' # Указываем страницу участников группы
     driver.get(url) # Загружаем страницу участников группы
     driver.implicitly_wait(2) # Ожидаем загрузки страницы    
 
@@ -52,7 +52,7 @@ def page_saver():
     # Цикл прокрутки страницы
     print(f'Выполняю прокрутку страницы {url} ...')
     scroll_counter = 0
-    while scroll_counter < 50:
+    while scroll_counter < 100:
         try:
             driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
             scroll_counter = 0

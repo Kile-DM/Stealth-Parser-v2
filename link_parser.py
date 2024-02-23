@@ -14,5 +14,5 @@ def link_parser():
                 file.write(f'https://ok.ru/{user_link}' + '\n')
                 file.close()
             
-
+    print('Ссылки сохранены в файл user_links.txt')
 

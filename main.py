@@ -8,12 +8,12 @@ from bs4 import BeautifulSoup
 
 def main():
     # Данные аккаунта для selenium
-    user_name = '+79310117613'
-    user_password = '4PeGbH28Uo'
+    user_name = '+79911608897'
+    user_password = 'J8IgXZQzIy'
 
     print('Начинаю работу!')
 
-    group_link = 'https://ok.ru/group/70000002413040/members'
+    group_link = 'https://ok.ru/group/70000002501616/members'
 
     # Добавляем опции 
     chrome_options = webdriver.ChromeOptions()

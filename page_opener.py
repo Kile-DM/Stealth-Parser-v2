@@ -10,8 +10,8 @@ import random
 def main():
     counter = 0 # Счетчик посещения страниц
     # Данные аккаунта для selenium
-    user_name = '+79310117613'
-    user_password = '4PeGbH28Uo'
+    user_name = '+79966787719'
+    user_password = 'WqdKrZwHvr'
 
     print('Начинаю работу!')
 
@@ -61,10 +61,10 @@ def main():
             final_link = f'https://ok.ru/{link}'
             driver.get(final_link)
             print(f'{final_link} страница посещена')
-            time.sleep(random.randint(1, 60))
+            time.sleep(random.randint(1, 240))
             counter += 1
-            if counter >= 200:
-                break
+            #if counter >= 200:
+                #break
         file.close()
  
     print('Работа завершена!')

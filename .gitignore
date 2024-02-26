@@ -1,6 +1,6 @@
 .venv/
+resources/
 __pycache__/
 resources/
 saved_page.txt
 user_links.txt
-ttt.py

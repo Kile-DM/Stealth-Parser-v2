@@ -4,17 +4,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium_stealth import stealth
 from bs4 import BeautifulSoup
+import time
 
 
 def main():
-    # Данные аккаунта для selenium
-    user_name = '+79911608897'
+    user_name = '79911608897'
     user_password = 'J8IgXZQzIy'
 
     print('Начинаю работу!')
-
-    group_link = 'https://ok.ru/group/70000002501616/members'
-
     # Добавляем опции 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")
@@ -47,20 +44,23 @@ def main():
     driver.implicitly_wait(2) # Ждём загрузки страницы
 
     # Действия после входа
-    url = group_link # Указываем страницу участников группы
+    url = 'https://ok.ru/elenapodar/members' # Указываем страницу участников группы
     driver.get(url) # Загружаем страницу участников группы
     driver.implicitly_wait(2) # Ожидаем загрузки страницы    
 
-
     # Цикл прокрутки страницы
-    print(f'Выполняю прокрутку страницы {url} ...')
     scroll_counter = 0
+    print('Начинаю работу!')
     while scroll_counter < 50:
         try:
+            time.sleep(3)
+            driver.implicitly_wait(10)
             driver.find_element(By.CLASS_NAME, 'link-show-more').click()# Кликаем по кнопке "Показать еще"
             scroll_counter = 0
-            
         except:
+            time.sleep(3)
+            driver.implicitly_wait(10)
+            print(f'Выполняю прокрутку страницы {url} ...')
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight)") # Скроллим страницу вниз
             soup = BeautifulSoup(driver.page_source, 'html.parser') # Получаем код страницы с помощью BeautifulSoup
             user_cards = soup.find_all('div', class_='user-grid-card')
@@ -75,14 +75,12 @@ def main():
                         file.write(f'{user_link}\n')
                         print(f'Сохранена ссылка на пользователя: {user_link}')
                         file.close()
-                        file.close()
 
     # Закрываем браузер          
     print('Завершено!')
     driver.close()
     driver.quit()
 
+
 if __name__ == '__main__':
     main()
-        
-      
